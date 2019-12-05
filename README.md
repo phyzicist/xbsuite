@@ -3,7 +3,7 @@
 
 **xbsuite** is a set of Python tools (and bash scripts) related to XBeach simulations. They may be useful for certain stages of creating and analyzing the simulations.
 
-This suite consists of Python code written by Scott Feister. Some of the code is translations of MATLAB tools written by other XBeach authors.
+This suite consists of Python code written by Scott Feister. Some of the code is translations into Python of MATLAB tools written by other XBeach authors as part of the openearthtools library (www.openearth.eu).
 
 The primary use case has been personal, but I'm sharing these tools in case others find them useful.
 
@@ -16,34 +16,43 @@ This module requires **Python 3.6+**. Installation requires **git**.
 
 * [`numpy`](http://www.numpy.org/)
 * [`scipy`](https://www.scipy.org/)
+* [`pandas`](https://pandas.pydata.org/)
 * [`matplotlib`](https://matplotlib.org/)
 * [`h5py`](https://www.h5py.org/)
+* [`buoypy`](https://github.com/nickc1/buoypy)
 
 The dependencies may be installed according to the directions on 
 their webpages, or with any Python
 package manager that supports them. For example, one could use `pip` to install
 them as
  ```bash
-pip install numpy scipy matplotlib h5py
+pip install numpy scipy pandas matplotlib h5py
+pip install git+https://github.com/nickc1/buoypy.git
 ```
 
 **NOTE**: If you are on a cluster where you do not have write permissions to the python installation directory, you may need to add "--user" to your pip and setup calls here and below. E.g.
 ```bash
-pip install --user numpy scipy matplotlib h5py
+pip install --user numpy scipy pandas matplotlib h5py
+pip install --user git+https://github.com/nickc1/buoypy.git
 ```
 
 As an alternate to pip, one could also use [Anaconda Python](https://anaconda.org/anaconda/python) to
 install the dependencies
 ```bash
-conda install numpy scipy matplotlib h5py
+conda install numpy scipy pandas matplotlib h5py
+pip install git+https://github.com/nickc1/buoypy.git
 ```
 
 ### Installation
 After installing the required packages, we may install **xbsuite**.
 
-One way to install **xbsuite** is via
+One way to install **xbsuite** is with pip, by
 ```bash
 pip install git+https://github.com/phyzicist/xbsuite.git
+```
+or
+```bash
+pip install --user git+https://github.com/phyzicist/xbsuite.git
 ```
 
 To update **xbsuite** at a later date
