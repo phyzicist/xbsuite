@@ -42,16 +42,20 @@ def write(freqs, dirs, vardens, outdir = '.'):
     """ Write 'vardens.txt' from vardens array, into the specified folder.
     Inputs:
         dirs     1D float NumPy array (length m), Directions
-        freqs    1D float NumPy array (length n)
-        vardens  2D float NumPy array (n x m)
+        freqs    1D float NumPy array (length n), Frequencies
+        vardens  2D float NumPy array (n x m), Variance densities
         outdir   [Optional] Output directory into which to save 'vardens.txt'
     """
     # Check validity of inputs
+    if not isinstance(vardens, np.ndarray) or not isinstance(dirs, np.ndarray) or not isinstance(freqs, np.ndarray):
+        raise Exception("Inputs: dirs, freqs, and vardens must all be NumPy arrays.")
     if len(dirs.shape) > 1 or len(freqs.shape) > 1:
-        raise Exception("dirs and freqs must be 1D arrays")
+        raise Exception("Directions array and frequencies array must be 1D arrays")
     if vardens.shape != (freqs.shape[0], dirs.shape[0]):
-        raise Exception("Based on lengths of dirs and freqs, expected vardens shape of " + str((freqs.shape[0], dirs.shape[0])) + " but got shape of " + str(vardens.shape))
-
+        raise Exception("Based on lengths of directions array and frequencies array, expected variable density array shape of " + str((freqs.shape[0], dirs.shape[0])) + " but was given array with shape of " + str(vardens.shape))
+    if np.any(np.diff(dirs) < 0):
+        raise Exception("Directions array must be in strictly ascending order.")
+        
     # Write the file
     with open(os.path.join(outdir, 'vardens.txt'), 'w') as f:
         f.write(str(freqs.shape[0])+"\n")
@@ -66,4 +70,4 @@ if __name__ == "__main__":
     freqs = np.array([0.1,0.2])
     vardens = np.array([[10,20,30],[40,50,60]])
     write(freqs, dirs, vardens, outdir=r"C:\Users\scott\Documents\temp\dec2019")
-    pass
+    
